@@ -60,6 +60,12 @@ namespace Calculator
                     case "Point":
                         calc.AddPoint();
                         break;
+                    case "CE":
+                        calc.Clear();
+                        break;
+                    case "C":
+                        calc.ClearAll();
+                        break;
                 }
             }
 

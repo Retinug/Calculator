@@ -369,8 +369,10 @@
             this.btn_C.Name = "btn_C";
             this.btn_C.Size = new System.Drawing.Size(139, 79);
             this.btn_C.TabIndex = 3;
+            this.btn_C.Tag = "C";
             this.btn_C.Text = "C";
             this.btn_C.UseVisualStyleBackColor = true;
+            this.btn_C.Click += new System.EventHandler(this.button_Click);
             // 
             // btn_CE
             // 
@@ -380,8 +382,10 @@
             this.btn_CE.Name = "btn_CE";
             this.btn_CE.Size = new System.Drawing.Size(139, 79);
             this.btn_CE.TabIndex = 2;
+            this.btn_CE.Tag = "CE";
             this.btn_CE.Text = "CE";
             this.btn_CE.UseVisualStyleBackColor = true;
+            this.btn_CE.Click += new System.EventHandler(this.button_Click);
             // 
             // lb_Digit
             // 

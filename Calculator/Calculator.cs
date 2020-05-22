@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace Calculator
 {
@@ -48,12 +49,17 @@ namespace Calculator
 
         public void TransFormInput(CalculatorUnOperations op)
         {
-            input = input ?? 0;
+            if (!input.HasValue) input = result;
+            else input = input ?? 0;
+
             switch (op)
             {
                 case CalculatorUnOperations.Invert:
-                        input = -input;
+                {
+                    input = -input;
                     break;
+                }  
+                   
             }
             didUpdateValue?.Invoke(this, input.Value, fractionDigits ?? 0);
 
@@ -64,7 +70,7 @@ namespace Calculator
             if (this.op.HasValue && input.HasValue && result.HasValue)
             {
                 Compute();
-                this.op = null;
+                this.op = op;
             }
             else
                 this.op = op;
@@ -117,10 +123,15 @@ namespace Calculator
 
         public void Clear()
         {
-            input = 0;
-            //hasPoint = false;
+            input = null;
             fractionDigits = null;
             didUpdateValue?.Invoke(this, 0, 0);
+        }
+
+        public void ClearAll()
+        {
+            Clear();
+            result = null;
         }
     }
 }
