@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
 
 namespace Calculator
 {
     delegate void CalculatorUpdateOutput(Calculator sender, double value, int precision);
     delegate void CalculatorInternalError(Calculator sender, string message);
-
-    
 
     enum CalculatorUnOperations {Invert  }
     enum CalculatorOperations { Add, Sub, Mul, Div, Eq }
@@ -22,10 +14,7 @@ namespace Calculator
         double? input = null;
         double? result = null;
 
-        bool hasPoint;
-
-        int precision = 0;
-        int fractionDigits = 0;
+        int? fractionDigits = null;
 
         CalculatorOperations? op = null;
 
@@ -34,7 +23,7 @@ namespace Calculator
         public event CalculatorInternalError ComputationError;
         public void AddDigit(int digit) 
         {
-            if (hasPoint == false)
+            if (fractionDigits.HasValue == false)
             {
                 if (input.HasValue && Math.Log10(input.Value) > 10)
                 {
@@ -46,15 +35,15 @@ namespace Calculator
             else
             {
                 fractionDigits++;
-                input = (input ?? 0) + digit * Math.Pow(10, -fractionDigits);
+                input = (input ?? 0) + digit * Math.Pow(10, -fractionDigits.Value);
                 
             }
-            didUpdateValue?.Invoke(this, input.Value, precision);
+            didUpdateValue?.Invoke(this, input.Value, fractionDigits ?? 0);
         }
 
         public void AddPoint()
         {
-            hasPoint = true;
+            fractionDigits = 0;
         }
 
         public void TransFormInput(CalculatorUnOperations op)
@@ -66,7 +55,7 @@ namespace Calculator
                         input = -input;
                     break;
             }
-            didUpdateValue?.Invoke(this, input.Value, fractionDigits);
+            didUpdateValue?.Invoke(this, input.Value, fractionDigits ?? 0);
 
         }
 
@@ -129,8 +118,8 @@ namespace Calculator
         public void Clear()
         {
             input = 0;
-            hasPoint = false;
-            fractionDigits = 0;
+            //hasPoint = false;
+            fractionDigits = null;
             didUpdateValue?.Invoke(this, 0, 0);
         }
     }
