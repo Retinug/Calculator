@@ -6,8 +6,8 @@ namespace Calculator
     delegate void CalculatorUpdateOutput(Calculator sender, double value, int precision);
     delegate void CalculatorInternalError(Calculator sender, string message);
 
-    enum CalculatorUnOperations {Invert, Reciprocal}
-    enum CalculatorOperations {Add, Sub, Mul, Div, Eq, Percent}
+    enum CalculatorUnOperations { Invert, Reciprocal, Backspace, Sqr, Sqrt }
+    enum CalculatorOperations { Add, Sub, Mul, Div, Eq, Percent }
     
 
     class Calculator
@@ -47,7 +47,7 @@ namespace Calculator
             fractionDigits = 0;
         }
 
-        public void TransFormInput(CalculatorUnOperations op)
+        public void ProcessUnOp(CalculatorUnOperations op)
         {
             input = input ?? 0;
 
@@ -58,15 +58,36 @@ namespace Calculator
                     break;
 
                 case CalculatorUnOperations.Reciprocal:
-                    input = 1 / input;
+                    if(input.Value == 0)
+                        ComputationError?.Invoke(this, "Division by Zero");
+                    else
+                        input = 1 / input;
                     break;
-                   
+
+                case CalculatorUnOperations.Sqr:
+                    input = Math.Pow(input.Value, 2);
+                    break;
+
+                case CalculatorUnOperations.Sqrt:
+                    input = Math.Sqrt(input.Value);
+                    break;
+
+                case CalculatorUnOperations.Backspace:
+                    if (input < 10)
+                        input = 0;
+                    else
+                    {
+                        string line = input.Value.ToString().Remove(input.Value.ToString().Length - 1);
+                        input = Convert.ToDouble(line);
+                    }
+
+                    break;
             }
             didUpdateValue?.Invoke(this, input.Value, fractionDigits ?? 0);
 
         }
 
-        public void AddOperation(CalculatorOperations op)
+        public void ProcessBinOp(CalculatorOperations op)
         {
             if (this.op.HasValue && input.HasValue && result.HasValue)
             {
@@ -117,12 +138,12 @@ namespace Calculator
                         input = null;
                     }
                     break;
+
                 case CalculatorOperations.Percent:
                     result = result * input / 100;
                     didUpdateValue?.Invoke(this, result.Value, 0);
                     input = null;
                     break;
-                
             }
         }
 

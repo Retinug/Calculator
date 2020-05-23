@@ -40,28 +40,28 @@ namespace Calculator
                 switch (button.Tag)
                 {
                     case "Add":
-                        calc.AddOperation(CalculatorOperations.Add);
+                        calc.ProcessBinOp(CalculatorOperations.Add);
                         break;
                     case "Sub":
-                        calc.AddOperation(CalculatorOperations.Sub);
+                        calc.ProcessBinOp(CalculatorOperations.Sub);
                         break;
                     case "Mul":
-                        calc.AddOperation(CalculatorOperations.Mul);
+                        calc.ProcessBinOp(CalculatorOperations.Mul);
                         break;
                     case "Div":
-                        calc.AddOperation(CalculatorOperations.Div);
+                        calc.ProcessBinOp(CalculatorOperations.Div);
                         break;
                     case "Eq":
-                        calc.AddOperation(CalculatorOperations.Eq);
+                        calc.ProcessBinOp(CalculatorOperations.Eq);
                         break;
                     case "Invert":
-                        calc.TransFormInput(CalculatorUnOperations.Invert);
+                        calc.ProcessUnOp(CalculatorUnOperations.Invert);
                         break;
                     case "Point":
                         calc.AddPoint();
                         break;
                     case "Reciprocal":
-                        calc.TransFormInput(CalculatorUnOperations.Reciprocal);
+                        calc.ProcessUnOp(CalculatorUnOperations.Reciprocal);
                         break;
                     case "CE":
                         calc.Clear();
@@ -70,7 +70,16 @@ namespace Calculator
                         calc.ClearAll();
                         break;
                     case "Percent":
-                        calc.AddOperation(CalculatorOperations.Percent);
+                        calc.ProcessBinOp(CalculatorOperations.Percent);
+                        break;
+                    case "Sqr":
+                        calc.ProcessUnOp(CalculatorUnOperations.Sqr);
+                        break;
+                    case "Sqrt":
+                        calc.ProcessUnOp(CalculatorUnOperations.Sqrt);
+                        break;
+                    case "Backspace":
+                        calc.ProcessUnOp(CalculatorUnOperations.Backspace);
                         break;
                 }
             }

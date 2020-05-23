@@ -325,8 +325,10 @@
             this.btn_Sqrt.Name = "btn_Sqrt";
             this.btn_Sqrt.Size = new System.Drawing.Size(139, 79);
             this.btn_Sqrt.TabIndex = 7;
+            this.btn_Sqrt.Tag = "Sqrt";
             this.btn_Sqrt.Text = "sqrt";
             this.btn_Sqrt.UseVisualStyleBackColor = true;
+            this.btn_Sqrt.Click += new System.EventHandler(this.button_Click);
             // 
             // btn_Sqr
             // 
@@ -336,8 +338,10 @@
             this.btn_Sqr.Name = "btn_Sqr";
             this.btn_Sqr.Size = new System.Drawing.Size(139, 79);
             this.btn_Sqr.TabIndex = 6;
+            this.btn_Sqr.Tag = "Sqr";
             this.btn_Sqr.Text = "sqr";
             this.btn_Sqr.UseVisualStyleBackColor = true;
+            this.btn_Sqr.Click += new System.EventHandler(this.button_Click);
             // 
             // btn_Reciprocal
             // 
@@ -360,8 +364,10 @@
             this.btn_Backspace.Name = "btn_Backspace";
             this.btn_Backspace.Size = new System.Drawing.Size(140, 79);
             this.btn_Backspace.TabIndex = 4;
+            this.btn_Backspace.Tag = "Backspace";
             this.btn_Backspace.Text = "<-";
             this.btn_Backspace.UseVisualStyleBackColor = true;
+            this.btn_Backspace.Click += new System.EventHandler(this.button_Click);
             // 
             // btn_C
             // 
@@ -430,6 +436,7 @@
             this.MaximizeBox = false;
             this.Name = "CalculatorForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.Tag = "Backspace";
             this.Text = "Calculator";
             this.tblay_Buttons.ResumeLayout(false);
             this.tblay_Buttons.PerformLayout();
