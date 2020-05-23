@@ -48,7 +48,7 @@
             this.btn_Div = new System.Windows.Forms.Button();
             this.btn_Sqrt = new System.Windows.Forms.Button();
             this.btn_Sqr = new System.Windows.Forms.Button();
-            this.btn_Hundred = new System.Windows.Forms.Button();
+            this.btn_Reciprocal = new System.Windows.Forms.Button();
             this.btn_Backspace = new System.Windows.Forms.Button();
             this.btn_C = new System.Windows.Forms.Button();
             this.btn_CE = new System.Windows.Forms.Button();
@@ -84,7 +84,7 @@
             this.tblay_Buttons.Controls.Add(this.btn_Div, 3, 2);
             this.tblay_Buttons.Controls.Add(this.btn_Sqrt, 2, 2);
             this.tblay_Buttons.Controls.Add(this.btn_Sqr, 1, 2);
-            this.tblay_Buttons.Controls.Add(this.btn_Hundred, 0, 2);
+            this.tblay_Buttons.Controls.Add(this.btn_Reciprocal, 0, 2);
             this.tblay_Buttons.Controls.Add(this.btn_Backspace, 3, 1);
             this.tblay_Buttons.Controls.Add(this.btn_C, 2, 1);
             this.tblay_Buttons.Controls.Add(this.btn_CE, 1, 1);
@@ -339,16 +339,18 @@
             this.btn_Sqr.Text = "sqr";
             this.btn_Sqr.UseVisualStyleBackColor = true;
             // 
-            // btn_Hundred
+            // btn_Reciprocal
             // 
-            this.btn_Hundred.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_Hundred.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_Hundred.Location = new System.Drawing.Point(3, 158);
-            this.btn_Hundred.Name = "btn_Hundred";
-            this.btn_Hundred.Size = new System.Drawing.Size(139, 79);
-            this.btn_Hundred.TabIndex = 5;
-            this.btn_Hundred.Text = "1/x";
-            this.btn_Hundred.UseVisualStyleBackColor = true;
+            this.btn_Reciprocal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Reciprocal.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_Reciprocal.Location = new System.Drawing.Point(3, 158);
+            this.btn_Reciprocal.Name = "btn_Reciprocal";
+            this.btn_Reciprocal.Size = new System.Drawing.Size(139, 79);
+            this.btn_Reciprocal.TabIndex = 5;
+            this.btn_Reciprocal.Tag = "Reciprocal";
+            this.btn_Reciprocal.Text = "1/x";
+            this.btn_Reciprocal.UseVisualStyleBackColor = true;
+            this.btn_Reciprocal.Click += new System.EventHandler(this.button_Click);
             // 
             // btn_Backspace
             // 
@@ -410,8 +412,10 @@
             this.btn_Percent.Name = "btn_Percent";
             this.btn_Percent.Size = new System.Drawing.Size(139, 79);
             this.btn_Percent.TabIndex = 1;
+            this.btn_Percent.Tag = "Percent";
             this.btn_Percent.Text = "%";
             this.btn_Percent.UseVisualStyleBackColor = true;
+            this.btn_Percent.Click += new System.EventHandler(this.button_Click);
             // 
             // CalculatorForm
             // 
@@ -455,7 +459,7 @@
         private System.Windows.Forms.Button btn_Div;
         private System.Windows.Forms.Button btn_Sqrt;
         private System.Windows.Forms.Button btn_Sqr;
-        private System.Windows.Forms.Button btn_Hundred;
+        private System.Windows.Forms.Button btn_Reciprocal;
         private System.Windows.Forms.Button btn_Backspace;
         private System.Windows.Forms.Button btn_C;
         private System.Windows.Forms.Button btn_CE;

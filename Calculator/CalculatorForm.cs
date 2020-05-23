@@ -60,11 +60,17 @@ namespace Calculator
                     case "Point":
                         calc.AddPoint();
                         break;
+                    case "Reciprocal":
+                        calc.TransFormInput(CalculatorUnOperations.Reciprocal);
+                        break;
                     case "CE":
                         calc.Clear();
                         break;
                     case "C":
                         calc.ClearAll();
+                        break;
+                    case "Percent":
+                        calc.AddOperation(CalculatorOperations.Percent);
                         break;
                 }
             }

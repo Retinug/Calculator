@@ -6,8 +6,8 @@ namespace Calculator
     delegate void CalculatorUpdateOutput(Calculator sender, double value, int precision);
     delegate void CalculatorInternalError(Calculator sender, string message);
 
-    enum CalculatorUnOperations {Invert  }
-    enum CalculatorOperations { Add, Sub, Mul, Div, Eq }
+    enum CalculatorUnOperations {Invert, Reciprocal}
+    enum CalculatorOperations {Add, Sub, Mul, Div, Eq, Percent}
     
 
     class Calculator
@@ -49,16 +49,17 @@ namespace Calculator
 
         public void TransFormInput(CalculatorUnOperations op)
         {
-            if (!input.HasValue) input = result;
-            else input = input ?? 0;
+            input = input ?? 0;
 
             switch (op)
             {
                 case CalculatorUnOperations.Invert:
-                {
                     input = -input;
                     break;
-                }  
+
+                case CalculatorUnOperations.Reciprocal:
+                    input = 1 / input;
+                    break;
                    
             }
             didUpdateValue?.Invoke(this, input.Value, fractionDigits ?? 0);
@@ -116,7 +117,11 @@ namespace Calculator
                         input = null;
                     }
                     break;
-
+                case CalculatorOperations.Percent:
+                    result = result * input / 100;
+                    didUpdateValue?.Invoke(this, result.Value, 0);
+                    input = null;
+                    break;
                 
             }
         }
