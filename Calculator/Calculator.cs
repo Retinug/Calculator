@@ -44,7 +44,8 @@ namespace Calculator
 
         public void AddPoint()
         {
-            fractionDigits = 0;
+            if (!fractionDigits.HasValue)
+                fractionDigits = 0;
         }
 
         public void ProcessUnOp(CalculatorUnOperations op)
