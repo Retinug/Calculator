@@ -111,41 +111,35 @@ namespace Calculator
             {
                 case CalculatorOperations.Add:
                     result = result + input;
-                    didUpdateValue?.Invoke(this, result.Value, 0);
-                    input = null;
                     break;
 
                 case CalculatorOperations.Sub:
                     result = result - input;
-                    didUpdateValue?.Invoke(this, result.Value, 0);
-                    input = null;
                     break;
 
                 case CalculatorOperations.Mul:
                     result = result * input;
-                    didUpdateValue?.Invoke(this, result.Value, 0);
-                    input = null;
                     break;
 
                 case CalculatorOperations.Div:
                     if(input.HasValue && input.Value == 0)
                     {
                         ComputationError?.Invoke(this, "Division by Zero");
+                        return;
                     }
                     else
                     {
                         result = result / input;
-                        didUpdateValue?.Invoke(this, result.Value, 0);
-                        input = null;
                     }
                     break;
 
                 case CalculatorOperations.Percent:
                     result = result * input / 100;
-                    didUpdateValue?.Invoke(this, result.Value, 0);
-                    input = null;
                     break;
             }
+
+            didUpdateValue?.Invoke(this, result.Value, 0);
+            input = null;
         }
 
         public void Clear()
